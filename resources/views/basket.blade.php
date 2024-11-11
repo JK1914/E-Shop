@@ -1,10 +1,9 @@
-@extends('master')
+@extends('layouts.master')
 
 @section('title', 'Корзина')
 
 @section('content')
-
-    <div class="starter-template">
+    
         <h1>Корзина</h1>
         <p>Оформление заказа</p>
         <div class="panel">
@@ -18,37 +17,45 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($order->products as $product)
                     <tr>
                         <td>
-                            <a href="https://cdn.new-brz.net/app/public/models/MQAC2/large/w/180413170152994289.webp">
-                                <img height="56px" src="">
-                                iPhone X 64 GB
+                            <a href="{{route('product', [$product->category->code, $product->code])}}">
+                                <img height="56px" src="https://cdn.new-brz.net/app/public/models/MQAC2/large/w/180413170152994289.webp">
+                                {{$product->name}}
                             </a>
                         </td>
-                        <td><span class="badge">1</span>
-                            <div class="btn-group">
-                                <a type="button" class="btn btn-danger" href="">
+                        <td><span class="badge">{{$product->pivot->count}}</span>
+                            <div class="btn-group form-inline">
+                                <form action="{{route('basket-remove', $product)}}" method="post">
+                                    <button type="submit" class="btn btn-danger" href="{{route('basket-remove', $product)}}">
                                     <span class="glyphicon-minus" aria-hidden="true"></span>
-                                </a>
-                                <a type="button" class="btn btn-success" href="">
+                                    @csrf
+                                </form>                                
+                                <form action="{{route('basket-add', $product)}}" method="post">
+                                    <button type="submit" class="btn btn-success" href="{{route('basket-add', $product)}}">
                                     <span class="glyphicon-plus" aria-hidden="true"></span>
-                                </a>
+                                    @csrf
+                                </form>
+                                
                             </div>
                         </td>
-                        <td>71900 руб.</td>
-                        <td>71900 руб.</td>
+                        <td>{{$product->price}} руб.</td>
+                        <td>{{$product->getPriceForCount()}} руб.</td>
                     </tr>
+                    @endforeach
+                    
                     <tr>
                         <td colspan="3">Общая стоимость:</td>
-                        <td>71900 руб.</td>
+                        <td>{{$order->getFullPrice()}} руб.</td>
                     </tr>
                 </tbody>
             </table>
             <br>
             <div class="btn-group pull-right" role="group">
-                <a type="button" class="btn btn-success" href="">Оформить заказ</a>
+                <a type="button" class="btn btn-success" href="{{route('basket-place')}}">Оформить заказ</a>
             </div>
         </div>        
-    </div>
+  
 
 @endsection

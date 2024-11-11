@@ -25,16 +25,29 @@
                     <li><a href="{{route('index')}}">Сбросить</a></li>
                 </ul>
 
-                <!-- <ul class="nav navbar-nav navbar-right">
-                    <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/home">Панель администратора</a></li>
-                </ul> -->
+                <ul class="nav navbar-nav navbar-right">
+                    @guest
+                    <li><a href="{{route('login')}}">Панель администратора</a></li>  
+                    @endguest
+                    @auth
+                    <li><a href="{{route('home')}}">Панель администратора</a></li>                    
+                    <li><a href="{{route('get-logout')}}">Выйти</a></li>
+                    @endauth
+                </ul>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        @yield('content')
-    </div>
-    
+        <div class="starter-template">
+            @if(session()->has('success'))
+                <p class="alert alert-success">{{session()->get('success')}}</p>
+            @endif 
+            @if(session()->has('warning'))
+                <p class="alert alert-warning">{{session()->get('warning')}}</p>
+            @endif         
+            @yield('content')
+        </div>
+    </div>    
 </body>
 </html>
