@@ -1,5 +1,5 @@
 @extends('auth.layouts.master')
-@section('title', 'Категория' . $category->name)
+@section('title', 'Товар' . $product->name)
 @section('content')
 
 <div class="col-md-12">
@@ -16,28 +16,24 @@
             </tr>
             <tr>
                 <td>ID</td>
-                <td>{{$category->id}}</td>
+                <td>{{$product->id}}</td>
             </tr>
             <tr>
                 <td>Код</td>
-                <td>{{$category->code}}</td>
+                <td>{{$product->code}}</td>
             </tr>
             <tr>
                 <td>Название</td>
-                <td>{{$category->name}}</td>
+                <td>{{$product->name}}</td>
             </tr>
             <tr>
                 <td>Описание</td>
-                <td>{{$category->description}}</td>
+                <td>{{$product->price}}</td>
             </tr>
             <tr>
                 <td>Картинка</td>
-                <td><img src="{{Storage::url($category->image)}}" height="240px"></td>
-            </tr>
-            <tr>
-                <td>Кол-во товаров</td>
-                <td>{{$category->products->count()}}</td>
-            </tr>
+                <td><img src="{{Storage::url($product->image)}}" height="240px"></td>
+            </tr>            
         </tbody>
     </table>
 

@@ -3,7 +3,7 @@
 @section('title', 'Корзина')
 
 @section('content')
-    
+      
         <h1>Корзина</h1>
         <p>Оформление заказа</p>
         <div class="panel">
@@ -21,7 +21,7 @@
                     <tr>
                         <td>
                             <a href="{{route('product', [$product->category->code, $product->code])}}">
-                                <img height="56px" src="https://cdn.new-brz.net/app/public/models/MQAC2/large/w/180413170152994289.webp">
+                                <img height="56px" src="{{Storage::url($product->image)}}">
                                 {{$product->name}}
                             </a>
                         </td>

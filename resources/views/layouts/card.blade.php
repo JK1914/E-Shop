@@ -2,7 +2,7 @@
 
 <div class="col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <img src="https://cdn.new-brz.net/app/public/models/MQAC2/large/w/180413170152994289.webp" alt="iPhone X 64 Gb">
+                        <img src="{{Storage::url($product->image)}}" alt="iPhone X 64 Gb">
                         <div class="caption">
                             <h3>{{$product->name}}</h3>
                             <p>{{$product->price}}</p>

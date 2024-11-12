@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,10 +62,15 @@ class BasketController extends Controller
             $order->products()->attach($productId); 
         }   
 
+        
         if(Auth::check()){
             $order->user_id = Auth::id();
-            $order->save();
-        }        
+            $order->save();            
+        }      
+        
+        $product = Product::find($productId);
+
+        session()->flash('success', 'Добавлен товар ' . $product->name);
 
         return redirect()->route('basket');        
     }
