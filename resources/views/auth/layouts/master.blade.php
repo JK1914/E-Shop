@@ -26,7 +26,7 @@
                 <ul class="nav navbar-nav"> 
                     @admin
                     <li><a href="{{route('categories.index')}}">Категории</a></li>
-                    <li><a href="{{route('basket')}}">В корзину</a></li>  
+                    <li><a href="{{route('products.index')}}">Товары</a></li>  
                     <li><a href="{{route('index')}}">Заказы</a></li>
                     @endadmin
                 </ul>

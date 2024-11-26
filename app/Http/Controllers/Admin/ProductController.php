@@ -33,10 +33,13 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(ProductRequest $request)
-    {
-        $path = $request->file('image')->store('products');
-        $params = $request->all();
-        $params['image'] = $path;               
+    {        
+        $params = $request->all();        
+        unset($params['image']);
+        if($request->has('image')){
+            $params['image'] = $request->file('image')->store('products');            
+        } 
+        
         Product::create($params);
         return redirect()->route('products.index');
     }
@@ -63,10 +66,19 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        Storage::delete('image');
-        $path = $request->file('image')->store('products');
-        $params = $request->all();
-        $params['image'] = $path;        
+        $params = $request->all();        
+        unset($params['image']);
+        if($request->has('image')){
+            Storage::delete('image');
+            $params['image'] = $request->file('image')->store('products');            
+        }  
+            
+        foreach(['new', 'hit', 'recommend'] as $fieldName){
+            if(!isset($params[$fieldName])){
+                $params[$fieldName] = 0;                
+            }            
+        }
+
         $product->update($params);
         return redirect()->route('products.index');
     }
