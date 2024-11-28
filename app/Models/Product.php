@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
     // public function getCategory(){
     //     return $category = Category::find($this->category_id);        
-    // }
+    // }    
 
     protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'hit', 'new', 'recommend'];
 

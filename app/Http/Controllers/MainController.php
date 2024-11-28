@@ -5,14 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductsFilterRequest;
 use App\Models\Category;
 use App\Models\Product;
+use \Debugbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MainController extends Controller
 {
     public function index (ProductsFilterRequest $request){ 
-        $productsQuery = Product::query();
         
-        if($request->filled('price_from')){
+        //Log::channel('single')->info($request->ip()); 
+               
+        // $productsQuery = Product::query();
+
+        Debugbar::info($request->has('price_from'));
+
+        $productsQuery = Product::with('category');
+        
+        if($request->filled('price_from')){            
             $productsQuery->where('price', '>=', $request->price_from);
         }          
 
@@ -36,6 +45,7 @@ class MainController extends Controller
     }
 
     public function category ($code){
+
         $category = Category::where('code', $code)->first();  
         return view('category', compact('category'));
     }
