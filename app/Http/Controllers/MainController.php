@@ -17,7 +17,7 @@ class MainController extends Controller
                
         // $productsQuery = Product::query();
 
-        Debugbar::info($request->has('price_from'));
+        // Debugbar::info($request->has('price_from'));
 
         $productsQuery = Product::with('category');
         
@@ -31,7 +31,7 @@ class MainController extends Controller
 
         foreach(['hit', 'new', 'recommend'] as $filed){
             if($request->has($filed)){
-                $productsQuery->where($filed, 1);
+                $productsQuery->$filed();
             }
         }       
 
