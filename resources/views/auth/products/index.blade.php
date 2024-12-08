@@ -23,6 +23,9 @@
                     Цена
                 </th>
                 <th>
+                    Количество
+                </th>
+                <th>
                     Действия
                 </th>
             </tr>
@@ -44,7 +47,8 @@
                     Бытовая техника  
                     @endif
                 </td> 
-                <td>{{$product->price}}</td>             
+                <td>{{$product->price}}</td>
+                <td>{{$product->count}}</td>             
                 <td>
                     <div class="btn-group" role="group">
                         <form action="{{route('products.destroy', $product)}}" method="POST">

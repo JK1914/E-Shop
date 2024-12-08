@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
-    // public function getCategory(){
-    //     return $category = Category::find($this->category_id);        
-    // }    
 
-    protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'hit', 'new', 'recommend'];
+    use SoftDeletes;   
+
+    protected $fillable = ['name', 'code', 'price', 'category_id', 'description', 'image', 'hit', 'new', 'recommend', 'count'];
 
     public function category(){
         return $this->belongsTo(Category::class);
@@ -23,6 +23,14 @@ class Product extends Model
             return $this->pivot->count * $this->price;
         }
         return $this->price;                           
+    }
+
+    public function isAvailable(){        
+        return !$this->trashed() && $this->count>0;
+    }
+
+    public function scopeByCode($query, $code){
+        return $query->where('code', $code);
     }
 
     public function scopeHit($query){

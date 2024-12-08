@@ -2,13 +2,14 @@
 
 @section ('title', 'Товар')
 
-@section('content')
-        
-            <h1>iPhone X 64 Gb</h1>
-            <h2>{{$product}}</h2>
-            <p>Цена: <b>71990 руб.</b></p>
-            <img src="https://cdn.new-brz.net/app/public/models/MQAC2/large/w/180413170152994289.webp" alt="iPhone X 64 Gb">
-            <p>Отличный телефон с памятью на 64 Gb</p>
-            <a href="http://laravel-diplom-1.rdavydov.ru/basket/1/add" class="btn btn-primary" role="button">Добавить в корзину</a>   
+@section('content')      
+            <h1>{{$product->name}}</h1>
+            <h2>{{$product->category->name}}</h2>
+            <p>Цена: <b>{{$product->price}} руб.</b></p>
+            <img src="{{Storage::url($product->image)}}" alt="iPhone X 64 Gb">
+            <p>{{$product->description}}</p>
+            @if($product->isAvailable())<a href="{{route('basket-add' , $product)}}" class="btn btn-success" role="button">Добавить в корзину</a>     
+            @else <button type="submit" class="btn btn-danger" role="button">Недоступен</button> 
+            @endif   
         
 @endsection

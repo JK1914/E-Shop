@@ -18,13 +18,14 @@
                             <th>Стоимость</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach ($order->products as $product)
+                    <tbody>                        
+                        @foreach ($products as $product)
                         <tr>
                             <td>
-                                <a href="{{route('product', $product)}}">
+                                <a href="{{route('product', [$product->category->code, $product->code])}}">
                                     <img height="56px"
-                                    src="{{Storage::url($product->image)}}">                                    
+                                    src="{{Storage::url($product->image)}}">  
+                                    {{$product->name}}                                  
                                 </a>
                             </td>
                             <td><span class="badge">1</span></td>
@@ -34,7 +35,7 @@
                         @endforeach
                         <tr>
                             <td colspan="3">Общая стоимость:</td>
-                            <td>{{$order->getFullPrice()}}</td>
+                            <td>{{$order->calculateFullSum()}}</td>
                         </tr>                       
                     </tbody>
                 </table>
