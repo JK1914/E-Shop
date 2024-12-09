@@ -28,13 +28,13 @@
                         <td><span class="badge">{{$product->pivot->count}}</span>
                             <div class="btn-group form-inline">
                                 <form action="{{route('basket-remove', $product)}}" method="post">
-                                    <button type="submit" class="btn btn-danger" href="{{route('basket-remove', $product)}}">
-                                    <span class="glyphicon-minus" aria-hidden="true"></span>
+                                    <button type="submit" class="btn btn-danger" href="">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
                                     @csrf
                                 </form>                                
                                 <form action="{{route('basket-add', $product)}}" method="post">
-                                    <button type="submit" class="btn btn-success" href="{{route('basket-add', $product)}}">
-                                    <span class="glyphicon-plus" aria-hidden="true"></span>
+                                    <button type="submit" class="btn btn-success" href="">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                     @csrf
                                 </form>
                                 

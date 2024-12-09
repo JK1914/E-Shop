@@ -8,7 +8,13 @@
             <p>Цена: <b>{{$product->price}} руб.</b></p>
             <img src="{{Storage::url($product->image)}}" alt="iPhone X 64 Gb">
             <p>{{$product->description}}</p>
-            @if($product->isAvailable())<a href="{{route('basket-add' , $product)}}" class="btn btn-success" role="button">Добавить в корзину</a>     
+            @if($product->isAvailable())
+            <form action="{{route('basket-add', $product)}}" method="post">
+                                    @if($product->isAvailable())<button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>  
+                                    @else <button type="submit" class="btn btn-danger" role="button">Недоступен</button> 
+                                    @endif                
+                                @csrf
+            </form> 
             @else <button type="submit" class="btn btn-danger" role="button">Недоступен</button> 
             @endif   
         
