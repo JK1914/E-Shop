@@ -10,12 +10,18 @@
             <p>{{$product->description}}</p>
             @if($product->isAvailable())
             <form action="{{route('basket-add', $product)}}" method="post">
-                                    @if($product->isAvailable())<button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>  
-                                    @else <button type="submit" class="btn btn-danger" role="button">Недоступен</button> 
-                                    @endif                
-                                @csrf
+                <button type="submit" class="btn btn-success" role="button">Добавить в корзину</button>
+                @csrf
             </form> 
-            @else <button type="submit" class="btn btn-danger" role="button">Недоступен</button> 
+            @else 
+            <span>Недоступно</span>
+            <br>
+            <span>Сообщить мне, когда товар появится в наличии</span>
+            <form method="POST" action="{{route('subscription', $product)}}">
+                @csrf
+                <input type="email" name="email">
+                <button type="submit">Отправить</button>
+            </form>
             @endif   
         
 @endsection
