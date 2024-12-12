@@ -1,6 +1,6 @@
 <p>Уважаемый {{$name}} </p>
 
-<p>Ваш заказ на сумму {{$FullSum}} создан!</p>
+<p>{{__('mail.order_created.your_order')}} {{$FullSum}} создан!</p>
 
 <table>
     <tbody>
